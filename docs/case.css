@@ -1,0 +1,45 @@
+/* Case study page. Uses the tokens from styles.css. */
+.case-nav { position: sticky; top: 0; display: flex; justify-content: space-between; align-items: center; padding: 14px 24px; background: rgba(255, 255, 255, 0.92); backdrop-filter: saturate(180%) blur(12px); border-bottom: 1px solid var(--line); font-size: 14px; z-index: 10; }
+.case-nav a { color: var(--accent); text-decoration: none; }
+.case-nav span { color: var(--muted); }
+
+.case { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; line-height: 1.6; font-size: 17px; }
+.case-hero h1 { font-size: 52px; letter-spacing: -0.03em; line-height: 1.05; margin: 6px 0 16px; }
+.lede { font-size: 21px; line-height: 1.5; }
+.case h2 { font-size: 28px; letter-spacing: -0.02em; margin: 64px 0 12px; }
+.case h3 { font-size: 19px; margin: 32px 0 6px; }
+.case a { color: var(--accent); }
+.case strong { font-weight: 600; }
+
+.facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 28px 0; padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.facts dt { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.facts dd { margin: 4px 0 0; font-size: 15px; line-height: 1.4; }
+
+.button { display: inline-block; background: var(--accent); color: var(--accent-ink) !important; text-decoration: none; border-radius: 999px; padding: 11px 22px; font-weight: 600; font-size: 16px; }
+.fine { font-size: 13px; color: var(--muted); }
+.links { font-size: 15px; }
+
+.case table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 15px; line-height: 1.45; }
+.case th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 600; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--ink); }
+.case td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+
+.example { background: var(--chip-bg); border-radius: 14px; padding: 16px 18px; margin: 18px 0; }
+.example-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 8px; }
+.row { margin: 0; display: grid; gap: 6px; }
+.row div { display: grid; grid-template-columns: 110px 1fr; gap: 12px; font-size: 15px; }
+.row dt { color: var(--muted); }
+.row dd { margin: 0; }
+
+.case ul { padding-left: 20px; }
+.case li { margin-bottom: 10px; }
+.case blockquote { margin: 18px 0; padding: 14px 18px; border-left: 3px solid var(--accent); background: var(--chip-bg); border-radius: 0 12px 12px 0; font-size: 16px; }
+.case-foot { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--line); }
+
+@media (max-width: 600px) {
+  .case { font-size: 16px; padding: 32px 16px 64px; }
+  .case-hero h1 { font-size: 40px; }
+  .lede { font-size: 19px; }
+  .facts { grid-template-columns: 1fr; }
+  .case table { display: block; overflow-x: auto; }
+  .row div { grid-template-columns: 1fr; gap: 0; }
+}

@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create a vibe · Case study</title>
+  <meta name="description" content="Case study: content design and content engineering for turning loose music requests into playlists.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="case.css">
+</head>
+<body>
+  <nav class="case-nav">
+    <a href="index.html">← Prototype</a>
+    <span>Case study</span>
+  </nav>
+
+  <article class="case">
+    <header class="case-hero">
+      <p class="kicker">Content design · Content engineering · Concept</p>
+      <h1>Create a vibe</h1>
+      <p class="lede">"Play breakup music" sounds simple. It isn't a field in any music catalog. Someone has to decide what it means, what else people call it, when it's ambiguous, and what the system says when it isn't sure. This is that work, end to end.</p>
+      <dl class="facts">
+        <div><dt>Role</dt><dd>Content design and content engineering (solo concept)</dd></div>
+        <div><dt>Built with</dt><dd>Claude, as a working partner for research, code and checks</dd></div>
+        <div><dt>Deliverables</dt><dd>Vocabulary, flow and copy, fixed text, golden set, tests, working prototype</dd></div>
+      </dl>
+      <p><a class="button" href="index.html">Try the prototype</a></p>
+      <p class="fine">Unaffiliated concept. Not an Apple product. Songs and artists in the prototype are fictional.</p>
+    </header>
+
+    <section>
+      <h2>Where this comes from</h2>
+      <p>My day job is content design for a clinician-facing AI assistant that answers drug questions. Most of the hard problems there aren't about tone. They're about <strong>identity and precision</strong>: working out which drug someone means, when an abbreviation means two different things, and what the system is allowed to say when it can't help.</p>
+      <p>I can't share that work. So I rebuilt the same thinking in a domain anyone can read: music. The methods carry over directly; none of the data, code or details do.</p>
+      <table>
+        <thead><tr><th>Healthcare AI problem</th><th>The music version</th></tr></thead>
+        <tbody>
+          <tr><td>An abbreviation that means two drugs should ask, not guess</td><td>"Breakup" means three different playlists, so it asks</td></tr>
+          <tr><td>Short abbreviations fuzzy-matching unrelated drug names</td><td>Slang matching the wrong vibe, so every label maps to exactly one vibe, enforced by a test</td></tr>
+          <tr><td>Search ranking is a deliberate business choice</td><td>"Based on: My taste / Popular right now / Classics" makes it the listener's choice</td></tr>
+          <tr><td>Safety messages must be true every time they appear</td><td>Fixed text for limits, like playing music at a business</td></tr>
+          <tr><td>Crisis messaging that over-fires labels people</td><td>A sad mood gets sad songs, never a hotline</td></tr>
+          <tr><td>A clinically reviewed golden dataset</td><td>A golden set of 23 requests, run as tests against the prototype</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section>
+      <h2>1. A vocabulary, not a list of moods</h2>
+      <p>Everything starts with a controlled vocabulary of 18 vibes in four facets: <strong>mood</strong> (how it feels), <strong>theme</strong> (what it's about), <strong>activity</strong> (what you're doing) and <strong>setting</strong> (where, and with whom). A request can combine them: "sad songs for a road trip" is a mood plus an activity.</p>
+      <p>Each vibe follows the shape of SKOS, the W3C standard for controlled vocabularies: a preferred label, alternate labels, and a broader term. It also carries plain-language levels for energy, positivity, tempo and lyrics, and a rule for when to ask.</p>
+      <div class="example">
+        <div class="example-label">One row, simplified</div>
+        <dl class="row">
+          <div><dt>Label</dt><dd>Over it</dd></div>
+          <div><dt>Also called</dt><dd>moving on · empowered breakup · petty breakup songs · revenge songs</dd></div>
+          <div><dt>Broader</dt><dd>Breakup</dd></div>
+          <div><dt>Feels</dt><dd>High energy, high positivity, mid to fast tempo</dd></div>
+        </dl>
+      </div>
+      <p><strong>Lead with the listener's words.</strong> A catalog would call this vibe "Empowered breakup." People say "I'm over it." The label is what people say; the catalog term becomes an alternate label.</p>
+      <p class="links"><a href="files/vibe_vocabulary_v0.csv">Vocabulary (CSV)</a> · <a href="files/ambiguous_terms_v0.csv">Ambiguous terms (CSV)</a></p>
+    </section>
+
+    <section>
+      <h2>2. Ask instead of guess, but only when it matters</h2>
+      <p>A vibe marked ambiguous must come with a question and real options. "Breakup" asks <em>"Still in it, or over it?"</em> and offers Sad breakup, Over it, and Missing them. Guessing wrong is worse than asking.</p>
+      <p>But a question is a cost, so the system only asks when the answer changes what plays:</p>
+      <ul>
+        <li><strong>Context can answer it.</strong> "Breakup songs for the gym" doesn't ask: the gym only fits the high-energy option. <a href="index.html?try=breakup%20songs%20for%20the%20gym">See it</a></li>
+        <li><strong>The listener may have answered already.</strong> "Breakup songs but I'm over it" plays immediately.</li>
+        <li><strong>Some words are held out on purpose.</strong> "Vibes," "lit," "emo," "throwback" and "venue" never map to one vibe silently. It's the same idea as keeping error-prone drug abbreviations off an alias list. <a href="index.html?try=lit%20playlist">See it</a></li>
+        <li><strong>Relative words depend on the listener.</strong> A throwback for one person is current for another, so "throwback" asks <em>"From when?"</em> and never guesses from age.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>3. Precision: every claim needs a source</h2>
+      <h3>Running at a pace</h3>
+      <p>People think in pace ("a 10-minute mile"). Music is measured in beats per minute. The label I wanted was "10-minute mile · about 170 BPM," but only if a source supported it.</p>
+      <ul>
+        <li>A 2025 study of experienced runners found an average of <strong>169 steps per minute</strong> at a 10-minute mile (Leacox et al., <em>Int J Sports Phys Ther</em>).</li>
+        <li>Research on running to music matches one beat per step (Buhmann et al., 2018, <em>PLoS One</em>).</li>
+        <li>But pace barely moves cadence: 10:00 to 7:00 per mile only changes it by about 9 steps. People vary far more than that.</li>
+      </ul>
+      <p>So the label says <strong>"about 169 BPM"</strong>, and Faster / Slower buttons in small steps do the real work. A common running-blog shortcut (songs at half your step rate) didn't make it in: I couldn't find research behind it. <a href="index.html?try=running%20music%20for%20a%2010%20minute%20mile">See it</a> · <a href="files/running_tempo_source.md">Sources</a></p>
+
+      <h3>Playing music at a business</h3>
+      <p>My first draft of this line was wrong in three ways, and fixing it is the clearest example of the precision this work needs.</p>
+      <table>
+        <thead><tr><th></th><th>First draft</th><th>After checking the terms</th></tr></thead>
+        <tbody>
+          <tr><td>Trigger</td><td>"Public venue"</td><td><strong>Commercial use.</strong> The service's terms say "personal, noncommercial" and never mention venues.</td></tr>
+          <tr><td>Claim</td><td>"I can't make a playlist"</td><td>Untrue: it can. The limit is where it's played.</td></tr>
+          <tr><td>Unclear words</td><td>"Venue" went straight to the limit</td><td>"Venue" asks first: <em>"Is this for a business?"</em> A wedding at a venue is private.</td></tr>
+        </tbody>
+      </table>
+      <blockquote>"Apple Music is for personal, noncommercial use, so it isn't licensed for playing at a business. For that, look for a business music service that includes a public performance license."</blockquote>
+      <p><a href="index.html?try=something%20for%20the%20venue">See "venue"</a> · <a href="index.html?try=music%20for%20my%20caf%C3%A9">See "my café"</a></p>
+    </section>
+
+    <section>
+      <h2>4. Fixed text that's true every time</h2>
+      <p>Some lines appear in many situations: too few matches, songs unavailable in your region, clean versions only. Each one is written so it's true in every case where it shows, not just the one I pictured.</p>
+      <ul>
+        <li><strong>"I found 4 songs that fit. Want me to loosen the occasion?"</strong> Uses the real count and offers a fix, instead of padding with songs that don't fit.</li>
+        <li><strong>"Some songs aren't available where you are, so I left them out."</strong> True whatever the reason. Doesn't guess which.</li>
+        <li><strong>"Pick a song, a mood, or an occasion to get started."</strong> When there's nothing to go on, nothing is invented.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>5. A mood is never a crisis</h2>
+      <p>"Sad girl music" and "songs for when I want to cry" get sad songs. Matching the mood is the help. Answering a mood with a hotline labels the listener, and people who've had it happen say it makes them feel worse.</p>
+      <p>Only an explicit statement of risk gets a support line, worded as an offer, with music still available. The trigger is narrow on purpose, and the golden set tests both sides.</p>
+    </section>
+
+    <section>
+      <h2>6. Content engineering: rules that hold</h2>
+      <p>Content decisions break quietly when a system grows. So the important ones are written down as checks:</p>
+      <table>
+        <thead><tr><th>Content design decides</th><th>Content engineering makes it hold</th></tr></thead>
+        <tbody>
+          <tr><td>Vibe names in the listener's words</td><td>Preferred and alternate labels in the vocabulary</td></tr>
+          <tr><td>When to ask instead of guess</td><td>An ambiguous vibe fails the check unless it has a question and real options</td></tr>
+          <tr><td>One meaning per label</td><td>A label that points to two vibes fails the check</td></tr>
+          <tr><td>Held-out words stay held out</td><td>Adding "vibes" to any vibe fails the check</td></tr>
+          <tr><td>The prototype says what the content says</td><td>The vocabulary file generates the prototype's data; all copy lives in one file</td></tr>
+          <tr><td>Expected behavior</td><td>A 23-request golden set, run against the prototype as tests</td></tr>
+        </tbody>
+      </table>
+      <p><strong>The tests caught my own gaps.</strong> Running the golden set against the prototype found three things I'd missed:</p>
+      <ul>
+        <li>"Wedding reception" wasn't in the vocabulary, so it didn't register as a party.</li>
+        <li>When nothing in a request was recognized, the prototype quietly played a generic mix. It now says so and asks.</li>
+        <li>"Chill but not sleepy" passed by luck: "sleepy" wasn't a label for Sleep, so the "not" did nothing. The test now checks that Sleep is actually ruled out.</li>
+      </ul>
+      <p class="links"><a href="files/golden_set_v0.csv">Golden set (CSV)</a> · <a href="files/validate_vocabulary.py">Vocabulary check (Python)</a></p>
+    </section>
+
+    <section>
+      <h2>What's next, and the limits</h2>
+      <ul>
+        <li><strong>The catalog is fictional.</strong> Energy and positivity levels would need calibrating against real audio features.</li>
+        <li><strong>"Classics" needs a real definition</strong> the data can check. The working one: from the chosen era, and still widely played today.</li>
+        <li><strong>Licensing varies by country.</strong> The business line was checked against US terms only.</li>
+        <li><strong>The vocabulary is a v0.</strong> It would grow from real requests, with the checks keeping it consistent as it does.</li>
+      </ul>
+    </section>
+
+    <footer class="case-foot">
+      <p><a class="button" href="index.html">Try the prototype</a></p>
+      <p class="fine">By Brittney Villalva. Built with Claude, which helped with research, code and checks; every claim was verified against the sources linked here. Unaffiliated concept; not an Apple product.</p>
+    </footer>
+  </article>
+</body>
+</html>
