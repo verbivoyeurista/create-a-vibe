@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create a vibe</title>
+  <meta name="description" content="A content design concept: turning loose music requests into playlists.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page">
+    <section class="intro">
+      <h1 id="pageTitle"></h1>
+      <p><a class="case-link" id="caseLink" href="index.html"></a></p>
+    </section>
+
+    <section class="device" aria-label="Prototype">
+      <div class="phone">
+        <img id="bezel" class="bezel" alt="">
+        <div class="island" aria-hidden="true"></div>
+        <div class="status" aria-hidden="true"><span>9:41</span><span class="status-icons">●●● ▮</span></div>
+        <div class="screen" id="screen"></div>
+        <div class="home" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <aside class="notes-panel">
+      <div class="notes-head">
+        <h2 id="notesTitle"></h2>
+        <button class="link" id="notesToggle"></button>
+      </div>
+      <ol class="notes" id="notes" aria-live="polite"></ol>
+    </aside>
+  </main>
+
+  <script src="data/vocabulary.js"></script>
+  <script src="data/catalog.js"></script>
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
